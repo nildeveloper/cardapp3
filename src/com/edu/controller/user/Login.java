@@ -21,7 +21,7 @@ public class Login extends HttpServlet {
         user.setPassword(password);
         UserDao userDao = new UserDao();
         User user1 = userDao.login(user);
-        if (user != null) {
+        if (user1 != null) {
             session.setAttribute("userId",user1.getId());
             session.setAttribute("user",user1);
             session.setAttribute("username",user1.getUsername());

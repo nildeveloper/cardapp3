@@ -98,4 +98,48 @@ public class TrashDao implements ITrashDao {
         }
         return row;
     }
+
+    /**
+     * 模糊查询回收站名片数据
+     * @param card
+     * @param session
+     * @return
+     */
+    @Override
+    public List<Card> selectTrash(Card card, HttpSession session) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Card> cards = new ArrayList<>();
+        int userId1 = (int) session.getAttribute("userId");
+        String sql = "select * from tb_card WHERE  user_id=? and isdelete=1 or name=?" +
+                " or tel=? or address=? or email=?";
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,userId1);
+            pstmt.setString(2,card.getName());
+            pstmt.setString(3,card.getTel());
+            pstmt.setString(4,card.getAddress());
+            pstmt.setString(5,card.getEmail());
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String tel = rs.getString("tel");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                int userId = rs.getInt("user_id");
+                int isDelete = rs.getInt("isdelete");
+                Card card1 = new Card(id,name,tel,address,email,userId,isDelete);
+                cards.add(card1);
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeDB(conn,pstmt,rs);
+        }
+        return cards;
+    }
 }

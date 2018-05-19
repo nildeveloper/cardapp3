@@ -19,11 +19,43 @@
     <!-- 标题行 -->
     <div class="row">
         <div class="col-md-10 col-md-offset-2">
-            <h2>卡片管理</h2>
+            <h2>回收站管理</h2>
         </div>
     </div>
+    <!-- 筛选行 -->
+    <div class="row">
+        <form class="form-inline" action="selectTrash" method="post" id="select_trash">
+            <div class="col-md-4 col-md-offset-2">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" class="form-control" id="name" placeholder="xxx">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="tel">电话</label>
+                    <input type="tel" class="form-control" id="tel" placeholder="188xxxxxxxx">
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <div class="form-group">
+                    <label for="address">地址</label>
+                    <input type="text" class="form-control" id="address" placeholder="山东省泰安市">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" class="form-control" id="email" placeholder="xxxx@163.com">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
+            <button type="submit" class="btn btn-default" id="find_card_btn">查询</button>
             <button type="button" class="btn btn-danger" id="delete_card_btn">删除</button>
         </div>
     </div>
@@ -93,11 +125,10 @@
         });
     });
 
-//    $(document).ready(function(){
-//        if(window.parent != window){
-//            parent.document.getElementById("main_frame").style.height = (document.body.scrollHeight+30)+"px";
-//        }
-//    });
+    // 回收站名片模糊查询S
+    $("#card_find_btn").click(function () {
+        $("#select_trash").submit();
+    });
 </script>
 </body>
 </html>

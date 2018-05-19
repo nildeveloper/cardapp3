@@ -101,4 +101,22 @@
         <servlet-name>FrameServlet</servlet-name>
         <url-pattern>/frame</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SelectServlet</servlet-name>
+        <servlet-class>com.edu.controller.card.SelectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectServlet</servlet-name>
+        <url-pattern>/selectCard</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SelectTrashServlet</servlet-name>
+        <servlet-class>com.edu.controller.trash.SelectTrashServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectTrashServlet</servlet-name>
+        <url-pattern>/selectTrash</url-pattern>
+    </servlet-mapping>
 </web-app>
