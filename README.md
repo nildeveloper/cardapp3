@@ -1,4 +1,4 @@
-##Java web 期末课程设计--名片管理系统
+#Java web 期末课程设计--名片管理系统
   1. Jsp+Servlet+JavaBean+Jdbc+DAO+MySQL+Bootstrap+jQuey。
   2. 其中也有一些不是很好的操作，譬如页面嵌套了iframe，其实应有更好的解决方案。
   3. 其中也牵扯对于ajax、EL表达式、JSTL、JSON等的应用
