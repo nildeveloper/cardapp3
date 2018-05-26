@@ -1,12 +1,6 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #eee;
-}
-
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
   background:url(../image/back.png);
   background-size:cover;
   background-repeat:no-repeat;
@@ -22,7 +16,7 @@ h1 {
 
 .form-signin{
   position: absolute;
-  top:50%;
+  top:65%;
   left:50%;
   margin-left:-165px;
   margin-top:-200px;

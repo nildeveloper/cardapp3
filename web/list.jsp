@@ -138,25 +138,25 @@
             <div class="col-md-4 col-md-offset-2">
                 <div class="form-group">
                     <label for="name">姓名</label>
-                    <input type="text" class="form-control" id="name" placeholder="xxx">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="xxx">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="tel">电话</label>
-                    <input type="tel" class="form-control" id="tel" placeholder="188xxxxxxxx">
+                    <input type="tel" class="form-control" name="tel" id="tel" placeholder="188xxxxxxxx">
                 </div>
             </div>
             <div class="col-md-4 col-md-offset-2">
                 <div class="form-group">
                     <label for="address">地址</label>
-                    <input type="text" class="form-control" id="address" placeholder="山东省泰安市">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="山东省泰安市">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="email">邮箱</label>
-                    <input type="text" class="form-control" id="email" placeholder="xxxx@163.com">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="xxxx@163.com">
                 </div>
             </div>
 
@@ -262,6 +262,39 @@
     // 模糊查询
     $("#find_card_btn").click(function () {
         $("#select_form").submit();
+    });
+
+    
+    // 全选/全不选
+    $("#checkall").click(function() {
+        // prop:  获取dom元素原生属性
+        $(".check_item").prop("checked", $(this).prop("checked"));
+    });
+    $(document).on("click", ".check_item", function () {
+        var flag = $(".check_item:checked").length==$(".check_item").length;  // 页面数据是否全选
+        $("#checkall").prop("checked",flag);
+    });
+    
+    // 将勾选选项放入回收站
+    $("#delete_card_btn").click(function () {
+        var idstr = "";
+        $.each($(".check_item:checked"),function () {
+            //组装卡片id字符串
+            idstr += $(this).val()+"-";
+        });
+        if (confirm("确定删除？")) {
+            // 批量删除
+            $.ajax({
+                url: "deleteCard",
+                type: "POST",
+                data: "id=" + idstr,
+                dataType: "text",
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "list";
+                }
+            });
+        }
     });
 </script>
 </html>

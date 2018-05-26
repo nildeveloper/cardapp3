@@ -8,6 +8,7 @@
           <element id="module-output" name="cardapp3" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="json" />
           <element id="library" level="project" name="lib" />
         </element>
       </element>

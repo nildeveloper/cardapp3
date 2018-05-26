@@ -28,25 +28,25 @@
             <div class="col-md-4 col-md-offset-2">
                 <div class="form-group">
                     <label for="name">姓名</label>
-                    <input type="text" class="form-control" id="name" placeholder="xxx">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="xxx">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="tel">电话</label>
-                    <input type="tel" class="form-control" id="tel" placeholder="188xxxxxxxx">
+                    <input type="tel" class="form-control" id="tel" name="tel" placeholder="188xxxxxxxx">
                 </div>
             </div>
             <div class="col-md-4 col-md-offset-2">
                 <div class="form-group">
                     <label for="address">地址</label>
-                    <input type="text" class="form-control" id="address" placeholder="山东省泰安市">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="山东省泰安市">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="email">邮箱</label>
-                    <input type="email" class="form-control" id="email" placeholder="xxxx@163.com">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="xxxx@163.com">
                 </div>
             </div>
 
@@ -125,8 +125,8 @@
         });
     });
 
-    // 回收站名片模糊查询S
-    $("#card_find_btn").click(function () {
+    // 回收站名片模糊查询
+    $("#find_card_btn").click(function () {
         $("#select_trash").submit();
     });
 </script>

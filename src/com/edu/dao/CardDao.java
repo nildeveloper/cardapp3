@@ -184,16 +184,25 @@ public class CardDao implements ICardDao {
         ResultSet rs = null;
         List<Card> cards = new ArrayList<>();
         int userId1 = (int) session.getAttribute("userId");
-        String sql = "select * from tb_card WHERE  user_id=? and isdelete=0 or name=?" +
-                " or tel=? or address=? or email=? ";
+        String s = " 1 = 1";
+        if (!card.getName().equals("")) {
+            s+=" and name like'%" + card.getName()+"%'";
+        }
+        if (!card.getTel().equals("")) {
+            s+=" and tel like '%" + card.getTel() + "'";
+        }
+        if (!card.getAddress().equals("")) {
+            s+= " and address like'%" + card.getAddress()+"%'";
+        }
+        if (!card.getEmail().equals("")) {
+            s+= " and email like'%" + card.getEmail() + "%'";
+        }
+        String sql = "select * from tb_card WHERE  user_id=? and isdelete=0 and";
         try {
+            sql += s;
             conn = DBConnection.getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,userId1);
-            pstmt.setString(2,card.getName());
-            pstmt.setString(3,card.getTel());
-            pstmt.setString(4,card.getAddress());
-            pstmt.setString(5,card.getEmail());
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
