@@ -15,20 +15,31 @@ public class Login extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String checkCode = request.getParameter("checkcode");
         HttpSession session = request.getSession();
+        String realCode = (String) session.getAttribute("realCode");
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         UserDao userDao = new UserDao();
         User user1 = userDao.login(user);
-        if (user1 != null) {
-            session.setAttribute("userId",user1.getId());
-            session.setAttribute("user",user1);
-            session.setAttribute("username",user1.getUsername());
-            request.getRequestDispatcher("frame").forward(request,response);
+        if (checkCode.equals(realCode)) {
+            if (user1 != null) {
+                session.setAttribute("userId", user1.getId());
+                session.setAttribute("user", user1);
+                session.setAttribute("username", user1.getUsername());
+                if (user1.getUsername().equals("admin")) {
+                    request.getRequestDispatcher("frame_admin.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("frame").forward(request, response);
+                }
+            } else {
+                request.setAttribute("message", "用户名或密码错误！");  // 验证失败
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         } else {
-            request.setAttribute("message","用户名或密码错误！");  // 验证失败
-            request.getRequestDispatcher("login.jsp").forward(request,response);
+            request.setAttribute("message", "验证码错误！");  // 验证失败
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

@@ -26,12 +26,13 @@
             <ul class="nav navbar-nav navbar-right" id="test">
                 <li id="li1"class="nav0 nav1" title="list"><a href="#" id="list_page">名片管理</a></li>
                 <li id="li2" class="nav1" title="listTrash"><a href="#" id="trash_page">回收站</a></li>
-                <li>
-                    <a href="#" style="font-size: 12px; color: white" class="disable">
-                        欢迎<font color="red" size="2px">${sessionScope.username}</font>登录
+                <li class="active">
+                    <a href="#" class="disable">
+                        欢迎<font color="red">${sessionScope.username}</font>登录
                     </a>
                 </li>
-                <li><a  href="login.jsp" style="font-size: 12px; color: white" >退出</a></li>
+                <li><a href="logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;注销</a></li>
+                <%--<li><a  href="login.jsp" style="font-size: 12px; color: white" >退出</a></li>--%>
             </ul>
         </div>
     </div>

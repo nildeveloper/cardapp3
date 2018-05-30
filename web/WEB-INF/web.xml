@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.edu.controller.user.Login</servlet-class>
@@ -119,4 +120,83 @@
         <servlet-name>SelectTrashServlet</servlet-name>
         <url-pattern>/selectTrash</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>VerifyServlet</servlet-name>
+        <servlet-class>com.edu.utils.VerifyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VerifyServlet</servlet-name>
+        <url-pattern>/verification</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListUserServlet</servlet-name>
+        <servlet-class>com.edu.controller.user.ListUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListUserServlet</servlet-name>
+        <url-pattern>/listUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>com.edu.controller.user.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ResetUserServlet</servlet-name>
+        <servlet-class>com.edu.controller.user.ResetUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetUserServlet</servlet-name>
+        <url-pattern>/resetUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.edu.controller.user.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+   <filter>
+       <filter-name>LoginFilter</filter-name>
+       <filter-class>com.edu.utils.LoginFilter</filter-class>
+   </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/trash.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/frame.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/frame_admin.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>ListServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>FrameServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>ListTrashServlet</servlet-name>
+    </filter-mapping>
+
 </web-app>

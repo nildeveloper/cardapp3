@@ -4,10 +4,13 @@ import com.edu.model.User;
 import com.edu.utils.DBConnection;
 import com.edu.utils.TableContants;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao implements IUserDao{
     
@@ -74,5 +77,88 @@ public class UserDao implements IUserDao{
             DBConnection.closeDB(conn, pstmt, rs);
         }
         return user1;
+    }
+
+    /**
+     * 查询全部用户
+     * @param session
+     * @return
+     */
+    @Override
+    public List<User> findAll(HttpSession session) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<User> users = new ArrayList<>();
+//        System.out.println(session.getAttribute("userId"));
+        String LIST_SQL = "select * from tb_user ";
+//        System.out.println(LIST_SQL);
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(LIST_SQL);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                User user = new User(id,username,password);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeDB(conn,pstmt,rs);
+        }
+        return users;
+    }
+
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
+    @Override
+    public int remove(User user) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String DELETE_SQL = "delete from tb_user where id = ?";
+        int row = 0;
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(DELETE_SQL);
+            pstmt.setInt(1,user.getId());
+            row = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeDB(conn,pstmt,rs);
+        }
+        return row;
+    }
+
+    /**
+     * 重置用户密码
+     * @param user
+     * @return
+     */
+    @Override
+    public int reset(User user) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String RESET_SQL = "update tb_user set password='123456' where id = ?";
+        int row = 0;
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(RESET_SQL);
+            pstmt.setInt(1,user.getId());
+            row = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeDB(conn,pstmt,rs);
+        }
+        return row;
     }
 }

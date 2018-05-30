@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ITrashDao {
 
-    public abstract int delete(Card card); // 删除一条记录
-    public abstract List<Card> findAll(HttpSession session);// 列出全部记录
-    public abstract int recover(Card card);  // 回收站恢复一条记录
-    public abstract List<Card> selectTrash(Card card, HttpSession session);
+    int delete(Card card); // 删除一条记录
+    List<Card> findAll(HttpSession session);// 列出全部记录
+    int recover(Card card);  // 回收站恢复一条记录
+    List<Card> selectTrash(Card card, HttpSession session);
 }

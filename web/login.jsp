@@ -30,6 +30,12 @@
                 <span class="help-block" style="color: red;">${requestScope.message}</span>
                 <label for="password" class="sr-only">Password</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码" required>
+                <span class="help-block"></span>
+                <label for="checkcode" class="sr-only">checkcode</label>
+                <div class="form-group form-inline hidden" id="check">
+                    <input type="text" id="checkcode" name="checkcode" class="form-control" placeholder="验证码" style="width: 65%" required>
+                    <img border="0" src="verification" id="check_image">
+                </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="true" name="rememberMe">记住密码</label>
@@ -84,7 +90,7 @@
 </body>
 <script>
     $(function () {
-        $("#tijiao").click(function () {
+        $("#tijiao").click(function () {  // 用户注册数据校验
             var password1 = $("#password1").text();
             var password2 = $("#password2").text();
             if (password1 != password2) {
@@ -94,7 +100,19 @@
                 $("#register_form").submit();
             }
         });
+
+        // 当交点落在密码输入框时，显示出验证码输入框
+        $("#password").focus(function () {
+            $("#check").removeClass("hidden") ;
+        });
+
+        // 验证码点击刷新
+        $("#check_image").click(function () {
+            $(this).attr("src","verification?flag="+Math.random());
+        });
+
     });
+  
     
 </script>
 </html>
