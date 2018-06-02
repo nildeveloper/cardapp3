@@ -165,6 +165,15 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditPwdServlet</servlet-name>
+        <servlet-class>com.edu.controller.user.EditPwdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditPwdServlet</servlet-name>
+        <url-pattern>/editPwd</url-pattern>
+    </servlet-mapping>
     
    <filter>
        <filter-name>LoginFilter</filter-name>

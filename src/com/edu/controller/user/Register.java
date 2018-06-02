@@ -2,6 +2,8 @@ package com.edu.controller.user;
 
 import com.edu.dao.UserDao;
 import com.edu.model.User;
+import com.edu.utils.MD5Util;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,8 @@ public class Register extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         int authrity = Integer.parseInt(request.getParameter("authrity"));
-        User user  = new User(username,password,authrity);
+        String passwordMd5 = MD5Util.MD5(password);  // MD5加密后的密码
+        User user  = new User(username,passwordMd5,authrity);
         UserDao userDao = new UserDao();
         int n = userDao.insertUser(user);
         if (n > 0) {

@@ -2,6 +2,7 @@ package com.edu.dao;
 
 import com.edu.model.User;
 import com.edu.utils.DBConnection;
+import com.edu.utils.MD5Util;
 import com.edu.utils.TableContants;
 
 import javax.servlet.http.HttpSession;
@@ -147,12 +148,40 @@ public class UserDao implements IUserDao{
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String RESET_SQL = "update tb_user set password='123456' where id = ?";
+        String RESET_SQL = "update tb_user set password='4QrcOUm6Wau+VuBX8g+IPg==' where id = ?";
         int row = 0;
         try {
             conn = DBConnection.getConnection();
             pstmt = conn.prepareStatement(RESET_SQL);
             pstmt.setInt(1,user.getId());
+            row = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeDB(conn,pstmt,rs);
+        }
+        return row;
+    }
+
+    /**
+     * 用户密码修改
+     * @param user
+     * @param newPwd
+     * @return
+     */
+    @Override
+    public int editPwd(User user, String newPwd) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "update tb_user set password = ? where id = ?";
+        String md5Pwd = MD5Util.MD5(newPwd);
+        int row = 0;
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,md5Pwd);
+            pstmt.setInt(2,user.getId());
             row = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -24,9 +24,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" id="test">
-                <li id="li1"class="nav0 nav1" title="list"><a href="#" id="list_page">名片管理</a></li>
-                <li id="li2" class="nav1" title="listTrash"><a href="#" id="trash_page">回收站</a></li>
-                <li id="li3" class="nav1" title="listUser"><a href="#" id="user_page">用户管理</a></li>
+                <li id="li1"class="nav0 nav1" title="list"><a href="#" id="list_page"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;名片管理</a></li>
+                <li id="li2" class="nav1" title="listTrash"><a href="#" id="trash_page"><span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;回收站</a></li>
+                <li id="li3" class="nav1" title="listUser"><a href="#" id="user_page"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
                 <li class="active">
                     <a href="#" class="disable">
                         欢迎<font color="red">${sessionScope.username}</font>登录

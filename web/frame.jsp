@@ -24,8 +24,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" id="test">
-                <li id="li1"class="nav0 nav1" title="list"><a href="#" id="list_page">名片管理</a></li>
-                <li id="li2" class="nav1" title="listTrash"><a href="#" id="trash_page">回收站</a></li>
+                <li id="li1"class="nav0 nav1" title="list"><a href="#" id="list_page"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;名片管理</a></li>
+                <li id="li2" class="nav1" title="listTrash"><a href="#" id="trash_page"><span class="glyphicon glyphicon-trash "></span>&nbsp;&nbsp;回收站</a></li>
+                <li id="li3" class="nav2"><a href="#" id="edit_pwd"><span class="glyphicon glyphicon-pencil "></span>&nbsp;&nbsp;修改密码</a></li>
                 <li class="active">
                     <a href="#" class="disable">
                         欢迎<font color="red">${sessionScope.username}</font>登录
@@ -53,5 +54,67 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="editPwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">密码修改</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="editPwd" method="post" id="register_form">
+                    <div class="form-group">
+                        <label for="password2" class="col-sm-2 control-label">新密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password2" name="password2"  placeholder="请输入新密码" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password3" class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password3" placeholder="请再次输入新密码" required>
+                        </div>
+                    </div>
+                    <span class="help-block" id="msg" style="color: red;">${requestScope.message}</span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+    // 弹出修改密码模态框
+    $(".nav2").click(function () {
+        $('#editPwdModal').modal({
+            backdrop: "static"
+        })
+        
+    });
+
+    // 点击修改密码提交按钮发送ajax请求修改密码
+    $(document).on("click","#submit",function () {
+        var password2 = $("#password2").val()
+        var password3 = $("#password3").val()
+        if (password2 != password3) {
+            alert("两次密码输入不一致！");
+            return false;
+        } else {
+            $.ajax({
+                url:"editPwd",
+                type:"POST",
+                data:"password2=" + password2,
+                dataType:"text",
+                success:function (result) {
+                    $("#msg").text(result);
+                }
+            });
+        }
+    });
+</script>
 </html>

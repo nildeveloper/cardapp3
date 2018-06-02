@@ -17,4 +17,6 @@ public interface IUserDao {
     int remove(User user);
     
     int reset(User user);
+    
+    int editPwd(User user, String newPwd);
 }

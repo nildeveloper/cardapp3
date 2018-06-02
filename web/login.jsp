@@ -101,11 +101,10 @@
             }
         });
 
-        // 当交点落在密码输入框时，显示出验证码输入框
-        $("#password").focus(function () {
-            $("#check").removeClass("hidden") ;
+        // 当密码输入框输入密码时，显示出验证码输入框
+        $("#password").change(function () {
+           $("#check").removeClass("hidden"); 
         });
-
         // 验证码点击刷新
         $("#check_image").click(function () {
             $(this).attr("src","verification?flag="+Math.random());
