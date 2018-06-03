@@ -49,7 +49,7 @@
 <%--页脚--%>
 <div class="row" id="bottom">
     <div class="col-md-12">
-        <div align="center"><a href="http://www.nildeveloper.cn">Esay Blog</a> Copyright@2018
+        <div align="center"><a href="http://www.nildeveloper.cn">Easy Blog</a> Copyright@2018
             <br> lhl 版权所有
         </div>
     </div>

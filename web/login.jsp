@@ -91,8 +91,8 @@
 <script>
     $(function () {
         $("#tijiao").click(function () {  // 用户注册数据校验
-            var password1 = $("#password1").text();
-            var password2 = $("#password2").text();
+            var password1 = $("#password1").val();
+            var password2 = $("#password2").val();
             if (password1 != password2) {
                 alert("两次密码输入不一致！");
                 return false;
