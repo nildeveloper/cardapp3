@@ -190,4 +190,32 @@ public class UserDao implements IUserDao{
         }
         return row;
     }
+
+    /**
+     * 检查用户是否存在
+     * @param username
+     * @return
+     */
+    @Override
+    public int checkUser(String username) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int n = 0;
+        String sql = "select * from tb_user where username = ?";
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                n = 1;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeDB(conn,pstmt,rs);
+        }
+        return n;
+    }
 }

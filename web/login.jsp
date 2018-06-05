@@ -58,7 +58,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" action="userregister" method="post" id="register_form">
-                    <div class="form-group">
+                    <div class="form-group" id="error1">
                         <label for="username1" class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="username1" name="username" placeholder="请输入用户名" required>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="authrity" value="2">
-                    <span class="help-block" style="color: red;">${requestScope.message}</span>
+                    <span class="help-block" style="color: red;" id="help">${requestScope.message}</span>
                 </form>
             </div>
             <div class="modal-footer">
@@ -89,29 +89,55 @@
 </div>
 </body>
 <script>
+    var isExit;
     $(function () {
-        $("#tijiao").click(function () {  // 用户注册数据校验
-            var password1 = $("#password1").val();
-            var password2 = $("#password2").val();
-            if (password1 != password2) {
-                alert("两次密码输入不一致！");
-                return false;
-            } else {
-                $("#register_form").submit();
+       
+    });
+
+    // 用户注册数据校验
+    $("#tijiao").click(function () {
+        var username1 = $("#username1").val();
+        check(username1);
+    });
+    
+    // 用户注册验证用户是否存在
+    function check(username) {
+        $.ajax({
+            url:"checkUser",
+            data:"username=" + username,
+            type:"POST",
+            dataType:"text",
+            success:function (result) {
+                if (result == "1") {
+                    // 若用户存在，给出提示信息
+                    $("#error1").addClass("has-error");
+                    $("#help").text("用户已存在");
+                    return false
+                } else {
+                    // 调用检验用户是否存在的函数
+                    var password1 = $("#password1").val();
+                    var password2 = $("#password2").val();
+                    if (password1 != password2) {
+                        alert("两次密码输入不一致！");
+                        return false;
+                    } else {
+                        $("#register_form").submit();
+                    }
+                }
             }
         });
+        return isExit;
+    }
 
-        // 当密码输入框输入密码时，显示出验证码输入框
-        $("#password").change(function () {
-           $("#check").removeClass("hidden"); 
-        });
-        // 验证码点击刷新
-        $("#check_image").click(function () {
-            $(this).attr("src","verification?flag="+Math.random());
-        });
-
+    // 当密码输入框输入密码时，显示出验证码输入框
+    $("#password").change(function () {
+        $("#check").removeClass("hidden");
     });
-  
+    // 验证码点击刷新
+    $("#check_image").click(function () {
+        $(this).attr("src","verification?flag="+Math.random());
+    });
+
     
 </script>
 </html>

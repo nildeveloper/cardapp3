@@ -14,9 +14,13 @@ public interface IUserDao {
 
     List<User> findAll(HttpSession session); // 列出全部记录
     
-    int remove(User user);
+    int remove(User user);  // 将用户放入回收站
     
-    int reset(User user);
+    int reset(User user);  // admin重置用户密码
     
-    int editPwd(User user, String newPwd);
+    int editPwd(User user, String newPwd);  // 修改用户密码
+    
+    int checkUser(String username);
+    
+    
 }
